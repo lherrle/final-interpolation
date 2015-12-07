@@ -1,0 +1,15 @@
+# C compilers
+CC=gcc
+LD=gcc
+
+# Compiler optimization flags
+OPTFLAGS = -O3
+CFLAGS = -std=gnu99
+LDFLAGS = -fopenmp
+
+# Add -DDEBUG_RUN to CPPFLAGS to cut down on the cases.
+CPPFLAGS = "-DCOMPILER=\"$(CC)\"" "-DFLAGS=\"$(OPTFLAGS)\""
+
+# Compile a C version
+LIBS = -lm
+OBJS = interpolation.o
