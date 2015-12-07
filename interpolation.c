@@ -66,3 +66,7 @@ double *lagrange_interp_2d ( int mx, int my, double xd_1d[], double yd_1d[],
     }
     return zi;
 }
+
+int main(int argc, char** argv) {
+    
+}
