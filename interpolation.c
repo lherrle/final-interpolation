@@ -67,6 +67,19 @@ double *lagrange_interp_2d ( int mx, int my, double xd_1d[], double yd_1d[],
     return zi;
 }
 
+void matrix_gen (double x_0, double dx, int n_x, double v_0, double dv, int n_v, doulbe dt, int n_l, double x[n_x], double v[n_v], double F[n_x][n_v]) {
+    int i, j;
+    for (i = 0; i < n_x; i++) {
+        x[i] = x_0 + dx*i;
+        for (j = 0; j < n_v; j++) {
+            if (i == 0) {
+                v[j] = v_0 + dv*j;
+            }
+            F[i][j] = cos(x[i]) * exp(-v[j]*v[j]);
+        }
+    }
+}
+
 int main(int argc, char** argv) {
     
 }
