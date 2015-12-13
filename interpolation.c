@@ -67,7 +67,7 @@ double *lagrange_interp_2d ( int mx, int my, double xd_1d[], double yd_1d[],
     return zi;
 }
 
-void matrix_gen (double x_0, double dx, int n_x, double v_0, double dv, int n_v, double dt, int n_l, double x[n_x], double v[n_v], double F[n_x][n_v]) {
+void matrix_gen (double x_0, double dx, int n_x, double v_0, double dv, int n_v, double dt, int n_l, double x[n_x+n_l*2], double v[n_v+n_l*2], double F[n_x][n_v]) {
     int i, j;
     for (i = 0; i < n_x; i++) {
         x[i] = x_0 + dx*i;
@@ -75,7 +75,21 @@ void matrix_gen (double x_0, double dx, int n_x, double v_0, double dv, int n_v,
             if (i == 0) {
                 v[j] = v_0 + dv*j;
             }
-            F[i][j] = cos(x[i]) * exp(-v[j]*v[j]);
+            F[i+n_l][j+n_l] = cos(x[i]) * exp(-v[j]*v[j]);
+        }
+    }
+    
+    for (i = 0; i < n_l; i++) {
+        for (j = 0; j < n_v + n_l*2; j++) {
+            F[i][j] = F[n_x+i][j];
+            f[i+n_x+n_l][j] = F[n_l+i][j];
+        }
+    }
+    
+    for (i = 0; i < n_l; i++) {
+        for (j = 0; j < n_x + n_l*2; j++) {
+            F[j][i] = 0;
+            f[j][i+n_v+n_l] = 0;
         }
     }
 }
