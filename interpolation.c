@@ -99,7 +99,7 @@ int main(int argc, char** argv) {
     double dx = 0.1;
     int n_x = 100;
     double v_0 = -5;
-    doulbe dv = 0.1;
+    double dv = 0.1;
     int n_v = 100;
     double dt = 0.0001;
     int n_l = 5;
