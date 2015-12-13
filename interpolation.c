@@ -109,4 +109,14 @@ int main(int argc, char** argv) {
     double F_2[n_x+n_l*2][n_v+n_l*2];
     
     matrix_gen(x_0, dx, n_x, v_0, dv, n_v, dt, n_l, x, v, F_1);
+    
+    int i,j;
+    double x~, v~;
+    
+    for (i = n_l; i < n_x; i++) {
+        for (j = n_l; j < n_v; j++) {
+            x~ = x[i] + v[j]*dt;
+            v~ = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
+        }
+    }
 }
