@@ -35,8 +35,8 @@ double lagrange_basis_function_1d ( int mx, double xd[], int i, double xi )
 /*
  from lagrange_interp_2d.c by John Burkardt
  */
-double *lagrange_interp_2d ( int mx, int my, double xd_1d[], double yd_1d[],
-                            double zd[], int ni, double xi[], double yi[] )
+double lagrange_interp_2d ( int mx, int my, double xd_1d[], double yd_1d[],
+                            double zd[], double xi, double yi )
 
 {
     int i;
@@ -45,25 +45,22 @@ double *lagrange_interp_2d ( int mx, int my, double xd_1d[], double yd_1d[],
     int l;
     double lx;
     double ly;
-    double *zi;
+    double zi;
     
-    zi = ( double * ) malloc ( ni * sizeof ( double ) );
     
-    for ( k = 0; k < ni; k++ )
+    l = 0;
+    zi = 0.0;
+    for ( j = 0; j < my + 1; j++ )
     {
-        l = 0;
-        zi[k] = 0.0;
-        for ( j = 0; j < my + 1; j++ )
+        for ( i = 0; i < mx + 1; i++ )
         {
-            for ( i = 0; i < mx + 1; i++ )
-            {
-                lx = lagrange_basis_function_1d ( mx, xd_1d, i, xi[k] );
-                ly = lagrange_basis_function_1d ( my, yd_1d, j, yi[k] );
-                zi[k] = zi[k] + zd[l] * lx * ly;
-                l = l + 1;
-            }
+            lx = lagrange_basis_function_1d ( mx, xd_1d, i, xi );
+            ly = lagrange_basis_function_1d ( my, yd_1d, j, yi );
+            zi = zi + zd[l] * lx * ly;
+            l = l + 1;
         }
     }
+    
     return zi;
 }
 
@@ -109,7 +106,7 @@ int main(int argc, char** argv) {
     double F_2[n_x+n_l*2][n_v+n_l*2];
     double sub[n_l][n_l];
     double sub_x[n_l], sub_v[n_l];
-    double* new_point;
+    double new_point;
     
     matrix_gen(x_0, dx, n_x, v_0, dv, n_v, dt, n_l, x, v, F_1);
     
@@ -132,7 +129,7 @@ int main(int argc, char** argv) {
                 }
             }
             
-            new_point = lagrange_interp_2d(n_l-1, n_l-1, sub_x, sub_v, sub, 1, {x_tilde}, {v_tilde});
+            new_point = lagrange_interp_2d(n_l-1, n_l-1, sub_x, sub_v, sub, x_tilde, v_tilde);
         }
     }
 }
