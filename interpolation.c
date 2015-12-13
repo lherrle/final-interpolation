@@ -107,16 +107,32 @@ int main(int argc, char** argv) {
     double v[n_v];
     double F_1[n_x+n_l*2][n_v+n_l*2];
     double F_2[n_x+n_l*2][n_v+n_l*2];
+    double sub[n_l][n_l];
+    double sub_x[n_l], sub_v[n_l];
+    double* new_point;
     
     matrix_gen(x_0, dx, n_x, v_0, dv, n_v, dt, n_l, x, v, F_1);
     
-    int i,j;
+    int i,j, x_c, v_c, ii, jj;
     double x_tilde, v_tilde;
     
     for (i = n_l; i < n_x; i++) {
         for (j = n_l; j < n_v; j++) {
             x_tilde = x[i] + v[j]*dt;
             v_tilde = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
+            x_c = x_tilde/dx - n_l/2;
+            v_c = v_tilde/dx - n_l/2;
+            for (ii=0; ii<n_l; ii++) {
+                sub_x[ii] = x[x_c+ii];
+                for (jj = 0; jj < n_l; jj++) {
+                    if(ii==0) {
+                        sub_v[jj] = v[v_c+jj];
+                    }
+                    sub[ii][jj] = F_1[x_c+ii][v_c+jj];
+                }
+            }
+            
+            new_point = lagrange_interp_2d(n_l-1, n_l-1, sub_x, sub_v, sub, 1, {x_tilde}, {v_tilde});
         }
     }
 }
