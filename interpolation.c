@@ -8,6 +8,8 @@
 
 #include "interpolation.h"
 
+#define NUM_ITER 100
+
 /*
  from lagrange_interp_2d.c by John Burkardt
  */
@@ -110,26 +112,53 @@ int main(int argc, char** argv) {
     
     matrix_gen(x_0, dx, n_x, v_0, dv, n_v, dt, n_l, x, v, F_1);
     
-    int i,j, x_c, v_c, ii, jj;
+    int i,j, x_c, v_c, ii, jj, iter;
     double x_tilde, v_tilde;
     
-    for (i = n_l; i < n_x; i++) {
-        for (j = n_l; j < n_v; j++) {
-            x_tilde = x[i] + v[j]*dt;
-            v_tilde = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
-            x_c = x_tilde/dx - n_l/2;
-            v_c = v_tilde/dx - n_l/2;
-            for (ii=0; ii<n_l; ii++) {
-                sub_x[ii] = x[x_c+ii];
-                for (jj = 0; jj < n_l; jj++) {
-                    if(ii==0) {
-                        sub_v[jj] = v[v_c+jj];
+    for (iter = 0; iter < NUM_ITER; iter ++) {
+        //on even iterations interpolate using f1 and put in f2
+        if (iter%2==0) {
+            for (i = n_l; i < n_x; i++) {
+                for (j = n_l; j < n_v; j++) {
+                    x_tilde = x[i] + v[j]*dt;
+                    v_tilde = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
+                    x_c = x_tilde/dx - n_l/2;
+                    v_c = v_tilde/dx - n_l/2;
+                    for (ii=0; ii<n_l; ii++) {
+                        sub_x[ii] = x[x_c+ii];
+                        for (jj = 0; jj < n_l; jj++) {
+                            if(ii==0) {
+                                sub_v[jj] = v[v_c+jj];
+                            }
+                            sub[ii][jj] = F_1[x_c+ii][v_c+jj];
+                        }
                     }
-                    sub[ii][jj] = F_1[x_c+ii][v_c+jj];
+                    
+                    new_point = lagrange_interp_2d(n_l-1, n_l-1, sub_x, sub_v, sub, x_tilde, v_tilde);
+                    F2[i][j] = new_point;
                 }
             }
-            
-            new_point = lagrange_interp_2d(n_l-1, n_l-1, sub_x, sub_v, sub, x_tilde, v_tilde);
+        } else { //on odd do opposite
+            for (i = n_l; i < n_x; i++) {
+                for (j = n_l; j < n_v; j++) {
+                    x_tilde = x[i] + v[j]*dt;
+                    v_tilde = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
+                    x_c = x_tilde/dx - n_l/2;
+                    v_c = v_tilde/dx - n_l/2;
+                    for (ii=0; ii<n_l; ii++) {
+                        sub_x[ii] = x[x_c+ii];
+                        for (jj = 0; jj < n_l; jj++) {
+                            if(ii==0) {
+                                sub_v[jj] = v[v_c+jj];
+                            }
+                            sub[ii][jj] = F_2[x_c+ii][v_c+jj];
+                        }
+                    }
+                    
+                    new_point = lagrange_interp_2d(n_l-1, n_l-1, sub_x, sub_v, sub, x_tilde, v_tilde);
+                    F1[i][j] = new_point;
+                }
+            }
         }
     }
 }
