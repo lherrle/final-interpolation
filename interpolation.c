@@ -111,12 +111,12 @@ int main(int argc, char** argv) {
     matrix_gen(x_0, dx, n_x, v_0, dv, n_v, dt, n_l, x, v, F_1);
     
     int i,j;
-    double x~, v~;
+    double x-tilde, v-tilde;
     
     for (i = n_l; i < n_x; i++) {
         for (j = n_l; j < n_v; j++) {
-            x~ = x[i] + v[j]*dt;
-            v~ = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
+            x-tilde = x[i] + v[j]*dt;
+            v-tilde = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
         }
     }
 }
