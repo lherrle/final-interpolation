@@ -4,7 +4,7 @@ include Makefile.in.$(PLATFORM)
 
 .PHONY:	all
 all: $(OBJS)
-	$(CC) $(OBJS) -o interpolate
+	$(LD) $(OBJS) -o interpolate
 
 %.o: %.c
 	$(CC) -c $(CFLAGS) $(OPTFLAGS) $(CPPFLAGS) $<
