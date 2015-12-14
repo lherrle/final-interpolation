@@ -24,7 +24,7 @@ double lagrange_basis_function_1d ( int mx, double xd[], int i, double xi )
     {
         for ( j = 0; j < mx + 1; j++ )
         {
-            if ( j != i )
+            if ( j != i && xd[i] != xd[j])
             {
                 yi = yi * ( xi - xd[j] ) / ( xd[i] - xd[j] );
             }
@@ -108,7 +108,7 @@ void print_center_to_file(char* file, int n_x, int n_v, int n_l, double mat[n_x 
     
     for (i = 0; i < n_v; i ++) {
         for (j = 0; j < n_x; j ++) {
-            fprintf(fp, "%f, ", mat[n_l + j][n_l+i]);
+            fprintf(fp, "%.8f, ", mat[n_l + j][n_l+i]);
         }
         fprintf(fp, "\n");
     }
