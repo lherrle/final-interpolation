@@ -24,7 +24,7 @@ double lagrange_basis_function_1d ( int mx, double xd[], int i, double xi )
     {
         for ( j = 0; j < mx + 1; j++ )
         {
-            if ( j != i && xd[i] != xd[j])
+            if ( j != i )
             {
                 yi = yi * ( xi - xd[j] ) / ( xd[i] - xd[j] );
             }
@@ -138,6 +138,7 @@ int main(int argc, char** argv) {
     matrix_gen(x_0, dx, n_x, v_0, dv, n_v, dt, n_l, x, v, F_1);
     
     print_center_to_file("F-init.csv", n_x, n_v, n_l, F_1);
+    print_center_to_file("F-xs.csv", n_x, 1, n_l, x);
     
     int i,j, x_c, v_c, ii, jj, iter;
     double x_tilde, v_tilde;
@@ -160,6 +161,7 @@ int main(int argc, char** argv) {
                             sub[ii][jj] = F_1[x_c+ii][v_c+jj];
                         }
                     }
+                    
                     
                     new_point = lagrange_interp_2d(n_l-1, n_l-1, sub_x, sub_v, sub, x_tilde, v_tilde);
                     F_2[i][j] = new_point;
