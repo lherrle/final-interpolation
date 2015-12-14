@@ -8,7 +8,7 @@
 
 #include "interpolation.h"
 
-#define NUM_ITER 100
+#define NUM_ITER 3
 
 /*
  from lagrange_interp_2d.c by John Burkardt
