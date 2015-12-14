@@ -138,7 +138,7 @@ int main(int argc, char** argv) {
     matrix_gen(x_0, dx, n_x, v_0, dv, n_v, dt, n_l, x, v, F_1);
     
     print_center_to_file("F-init.csv", n_x, n_v, n_l, F_1);
-    print_center_to_file("F-xs.csv", n_x, 1, 0, x);
+    print_center_to_file("F-vs.csv", n_v, 1, 0, v);
     
     int i,j, x_c, v_c, ii, jj, iter;
     double x_tilde, v_tilde;
@@ -169,6 +169,7 @@ int main(int argc, char** argv) {
             }
             if (iter == NUM_ITER/2) {
                 print_center_to_file("F-mid.csv", n_x, n_v, n_l, F_1);
+                print_center_to_file("F-midvs.csv", n_l, 1, 0, sub_v);
             }
         } else { //on odd do opposite
             for (i = n_l; i < n_x; i++) {
