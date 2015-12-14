@@ -138,7 +138,7 @@ int main(int argc, char** argv) {
     matrix_gen(x_0, dx, n_x, v_0, dv, n_v, dt, n_l, x, v, F_1);
     
     print_center_to_file("F-init.csv", n_x, n_v, n_l, F_1);
-    print_center_to_file("F-xs.csv", n_x, 1, n_l, x);
+    print_center_to_file("F-xs.csv", n_l, 1, n_l, x);
     
     int i,j, x_c, v_c, ii, jj, iter;
     double x_tilde, v_tilde;
