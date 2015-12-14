@@ -108,7 +108,7 @@ void print_center_to_file(char* file, int n_x, int n_v, int n_l, double mat[n_x 
     
     for (i = 0; i < n_v; i ++) {
         for (j = 0; j < n_x; j ++) {
-            fprintf(fp, "%f, ", mat[n_l + j][n_l+i);
+            fprintf(fp, "%f, ", mat[n_l + j][n_l+i]);
         }
         fprintf(fp, "\n");
     }
