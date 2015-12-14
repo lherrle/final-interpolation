@@ -81,7 +81,7 @@ void matrix_gen (double x_0, double dx, int n_x, double v_0, double dv, int n_v,
     
     for (i = 0; i < n_l; i++) {
         x[i] = x_0 - dx*(n_l - i);
-        x[n_l + n_x + i] = x_0 + dx(n_x + i);
+        x[n_l + n_x + i] = x_0 + dx*(n_x + i);
         for (j = 0; j < n_v + n_l*2; j++) {
             F[i][j] = F[n_x+i][j];
             F[i+n_x+n_l][j] = F[n_l+i][j];
@@ -90,7 +90,7 @@ void matrix_gen (double x_0, double dx, int n_x, double v_0, double dv, int n_v,
     
     for (i = 0; i < n_l; i++) {
         v[i] = v_0 - dv*(n_l - i);
-        v[n_l + n_v + i] = v_0 + dv(n_v + i);
+        v[n_l + n_v + i] = v_0 + dv*(n_v + i);
         for (j = 0; j < n_x + n_l*2; j++) {
             F[j][i] = 0;
             F[j][i+n_v+n_l] = 0;
