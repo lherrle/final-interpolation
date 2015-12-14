@@ -93,6 +93,27 @@ void matrix_gen (double x_0, double dx, int n_x, double v_0, double dv, int n_v,
     }
 }
 
+void print_center_to_file(char* file, int n_x, int n_v, int n_l, double mat[n_x + n_l*2][n_v+n_l*2]) {
+    FILE* fp;
+    char* mode = "w";
+    fp = fopen(file, mode);
+    
+    if(fp == NULL) {
+        fprintf(stderr, "Can't open output file %s!\n",
+                file);
+        exit(1);
+    }
+    
+    int i,j;
+    
+    for (i = 0; i < n_v; i ++) {
+        for (j = 0; j < n_x; j ++) {
+            fprintf(fp, "%f, ", mat[n_l + j][n_l+i);
+        }
+        fprintf(fp, "\n");
+    }
+}
+
 int main(int argc, char** argv) {
     double x_0 = 0;
     double dx = 0.1;
@@ -111,6 +132,8 @@ int main(int argc, char** argv) {
     double new_point;
     
     matrix_gen(x_0, dx, n_x, v_0, dv, n_v, dt, n_l, x, v, F_1);
+    
+    
     
     int i,j, x_c, v_c, ii, jj, iter;
     double x_tilde, v_tilde;
