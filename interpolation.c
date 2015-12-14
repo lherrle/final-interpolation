@@ -75,6 +75,7 @@ void matrix_gen (double x_0, double dx, int n_x, double v_0, double dv, int n_v,
                 v[j] = v_0 + dv*j;
             }
             F[i+n_l][j+n_l] = cos(x[i]) * exp(-1*v[j]*v[j]);
+            if(F[i+n_l][j+n_l] == 0) F[i+n_l][j+n_l] = 0;
         }
     }
     
