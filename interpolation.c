@@ -155,8 +155,8 @@ int main(int argc, char** argv) {
                 for (j = n_l; j < n_v; j++) {
                     x_tilde = x[i] + v[j]*dt;
                     v_tilde = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
-                    x_c = x_tilde/dx - n_l/2;
-                    v_c = v_tilde/dx - n_l/2;
+                    x_c = x_tilde/dx + n_l/2;
+                    v_c = v_tilde/dx + n_l/2;
                     for (ii=0; ii<n_l; ii++) {
                         sub_x[ii] = x[x_c+ii];
                         for (jj = 0; jj < n_l; jj++) {
@@ -181,8 +181,8 @@ int main(int argc, char** argv) {
                 for (j = n_l; j < n_v; j++) {
                     x_tilde = x[i] + v[j]*dt;
                     v_tilde = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
-                    x_c = x_tilde/dx - n_l/2;
-                    v_c = v_tilde/dx - n_l/2;
+                    x_c = x_tilde/dx + n_l/2;
+                    v_c = v_tilde/dx + n_l/2;
                     for (ii=0; ii<n_l; ii++) {
                         sub_x[ii] = x[x_c+ii];
                         for (jj = 0; jj < n_l; jj++) {
