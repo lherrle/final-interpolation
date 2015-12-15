@@ -125,12 +125,12 @@ void print_center_to_file(char* file, int n_x, int n_v, int n_l, double mat[n_x 
 int main(int argc, char** argv) {
     double x_0 = 0;
     double dx = 0.1;
-    int n_x = 100;
+    int n_x = atoi(argv[1]);
     double v_0 = -.5;
     double dv = 0.01;
-    int n_v = 100;
+    int n_v = n_x;
     double dt = 0.0001;
-    int n_l = 5;
+    int n_l = atoi(argv[2]);
     double x[n_x+2*n_l];
     double v[n_v+2*n_l];
     double F_1[n_x+n_l*2][n_v+n_l*2];
