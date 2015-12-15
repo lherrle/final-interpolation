@@ -7,7 +7,7 @@ all: $(OBJS)
 	$(CC) $(OBJS) -o interpolate $(LDFLAGS) $(LIBS)
 
 %.o: %.c
-	$(CC) -c $(CFLAGS) $(OPTFLAGS) $(CPPFLAGS) $(OMP_CFLAGS)$<
+	$(CC) -c $(CFLAGS) $(OPTFLAGS) $(CPPFLAGS) $(OMP_CFLAGS) $<
 
 .PHONY:	clean
 clean:
