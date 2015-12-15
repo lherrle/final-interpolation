@@ -57,9 +57,7 @@ double lagrange_interp_2d ( int mx, int my, double xd_1d[], double yd_1d[],
         for ( i = 0; i < mx + 1; i++ )
         {
             lx = lagrange_basis_function_1d ( mx, xd_1d, i, xi );
-            printf("%.8f:%d: %.8f\n", xi, i, lx);
             ly = lagrange_basis_function_1d ( my, yd_1d, j, yi );
-            printf("%.8f:%d: %.8f\n", yi, j, ly);
             zi = zi + zd[l] * lx * ly;
             l = l + 1;
         }
@@ -159,6 +157,8 @@ int main(int argc, char** argv) {
                     v_tilde = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
                     x_c = x_tilde/dx + n_l/2;
                     v_c = v_tilde/dv + n_l/2;
+                    printf("x_start_index: %d\n" + x_c);
+                    printf("v_start_index: %d\n" + v_c);
                     for (ii=0; ii<n_l; ii++) {
                         sub_x[ii] = x[x_c+ii];
                         for (jj = 0; jj < n_l; jj++) {
@@ -168,6 +168,22 @@ int main(int argc, char** argv) {
                             sub[ii][jj] = F_1[x_c+ii][v_c+jj];
                         }
                     }
+                    
+                    printf("x_values: ");
+                    
+                    for (ii = 0; ii < n_l; ii++) {
+                        printf("%.8f, ", sub_x[ii]);
+                    }
+                    
+                    printf("\n");
+                    
+                    printf("v_values: ");
+                    
+                    for (ii = 0; ii < n_l; ii++) {
+                        printf("%.8f, ", sub_v[ii]);
+                    }
+                    
+                    printf("\n");
                     
                     
                     new_point = lagrange_interp_2d(n_l-1, n_l-1, sub_x, sub_v, sub, x_tilde, v_tilde);
