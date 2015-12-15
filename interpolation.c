@@ -155,12 +155,9 @@ int main(int argc, char** argv) {
                 for (j = n_l; j < n_v + n_l; j++) {
                     x_tilde = x[i] + v[j]*dt;
                     v_tilde = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
-                    printf("x_tilde: %.8f\n", x_tilde);
-                    printf("v_tilde: %.8f\n", v_tilde);
                     x_c = floor((x_tilde-x_0)/dx) + n_l/2 + (n_l%2!=0);
                     v_c = floor((v_tilde-v_0)/dv) + n_l/2 + (n_l%2!=0);
-                    printf("x_start_index: %d\n", x_c);
-                    printf("v_start_index: %d\n", v_c);
+
                     for (ii=0; ii<n_l; ii++) {
                         sub_x[ii] = x[x_c+ii];
                         for (jj = 0; jj < n_l; jj++) {
@@ -170,23 +167,6 @@ int main(int argc, char** argv) {
                             sub[ii][jj] = F_1[x_c+ii][v_c+jj];
                         }
                     }
-                    
-                    printf("x_values: ");
-                    
-                    for (ii = 0; ii < n_l; ii++) {
-                        printf("%.8f, ", sub_x[ii]);
-                    }
-                    
-                    printf("\n");
-                    
-                    printf("v_values: ");
-                    
-                    for (ii = 0; ii < n_l; ii++) {
-                        printf("%.8f, ", sub_v[ii]);
-                    }
-                    
-                    printf("\n");
-                    
                     
                     new_point = lagrange_interp_2d(n_l-1, n_l-1, sub_x, sub_v, sub, x_tilde, v_tilde);
                     F_2[i][j] = new_point;
@@ -203,8 +183,9 @@ int main(int argc, char** argv) {
                 for (j = n_l; j < n_v; j++) {
                     x_tilde = x[i] + v[j]*dt;
                     v_tilde = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
-                    x_c = x_tilde/dx + n_l/2;
-                    v_c = v_tilde/dv + n_l/2;
+                    x_c = floor((x_tilde-x_0)/dx) + n_l/2 + (n_l%2!=0);
+                    v_c = floor((v_tilde-v_0)/dv) + n_l/2 + (n_l%2!=0);
+                    
                     for (ii=0; ii<n_l; ii++) {
                         sub_x[ii] = x[x_c+ii];
                         for (jj = 0; jj < n_l; jj++) {
