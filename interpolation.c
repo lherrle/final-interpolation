@@ -127,7 +127,7 @@ int main(int argc, char** argv) {
     double dx = 0.1;
     int n_x = 100;
     double v_0 = -.5;
-    double dv = .01;
+    double dv = 0.01;
     int n_v = 100;
     double dt = 0.0001;
     int n_l = 5;
@@ -151,6 +151,7 @@ int main(int argc, char** argv) {
     for (iter = 0; iter < NUM_ITER; iter ++) {
         //on even iterations interpolate using f1 and put in f2
         if (iter%2==0) {
+            #pragma omp parallel for
             for (i = n_l; i < n_x + n_l; i++) {
                 for (j = n_l; j < n_v + n_l; j++) {
                     x_tilde = x[i] + v[j]*dt;
@@ -173,6 +174,7 @@ int main(int argc, char** argv) {
                 }
             }
         } else { //on odd do opposite
+            #pragma omp parallel for
             for (i = n_l; i < n_x; i++) {
                 for (j = n_l; j < n_v; j++) {
                     x_tilde = x[i] + v[j]*dt;
