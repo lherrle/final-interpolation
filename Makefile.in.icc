@@ -1,5 +1,6 @@
 # C and Fortran compilers
 CC=icc 
+LD=ifort
 MPICC=mpiicc
 
 # Compiler optimization flags
