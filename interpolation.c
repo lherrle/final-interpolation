@@ -172,9 +172,11 @@ int main(int argc, char** argv) {
                     F_2[i][j] = new_point;
                 }
             }
-            if (iter == NUM_ITER/2) {
-                print_center_to_file("F-mid.csv", n_x, n_v, n_l, F_1);
-                print_center_to_file("F-midxs.csv", n_l, 1, 0, sub_x);
+            if (iter == 0) {
+                print_center_to_file("F-first.csv", n_x, n_v, n_l, F_1);
+            }
+            if (iter == 2) {
+                print_center_to_file("F-last.csv", n_x, n_v, n_l, F_1);
             }
         } else { //on odd do opposite
             for (i = n_l; i < n_x; i++) {
@@ -197,7 +199,7 @@ int main(int argc, char** argv) {
                     F_1[i][j] = new_point;
                 }
             }
-            if (iter == NUM_ITER/2) {
+            if (iter == 1) {
                 print_center_to_file("F-mid.csv", n_x, n_v, n_l, F_2);
             }
         }
