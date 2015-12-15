@@ -74,7 +74,7 @@ void matrix_gen (double x_0, double dx, int n_x, double v_0, double dv, int n_v,
             if (i == 0) {
                 v[j+n_l] = v_0 + dv*j;
             }
-            F[i+n_l][j+n_l] = cos(x[i]) * exp(-1*v[j]*v[j]);
+            F[i+n_l][j+n_l] = cos(x[i+n_l]) * exp(-1*v[j+n_l]*v[j+n_l]);
             if(F[i+n_l][j+n_l] == 0) F[i+n_l][j+n_l] = 0;
         }
     }
@@ -125,12 +125,12 @@ void print_center_to_file(char* file, int n_x, int n_v, int n_l, double mat[n_x 
 int main(int argc, char** argv) {
     double x_0 = 0;
     double dx = 0.1;
-    int n_x = 100;
-    double v_0 = -5;
+    int n_x = 10;
+    double v_0 = -.5;
     double dv = 0.1;
-    int n_v = 100;
+    int n_v = 10;
     double dt = 0.0001;
-    int n_l = 5;
+    int n_l = 3;
     double x[n_x+2*n_l];
     double v[n_v+2*n_l];
     double F_1[n_x+n_l*2][n_v+n_l*2];
