@@ -4,10 +4,10 @@ include Makefile.in.$(PLATFORM)
 
 .PHONY:	all
 all: $(OBJS)
-	$(LD) $(OBJS) -o interpolate $(LDFLAGS) $(LIBS)
+	$(LD) $(OBJS) -o interpolate $(LDFLAGS) $(LIBS) $(OMP_CFLAGS)
 
 %.o: %.c
-	$(CC) -c $(CFLAGS) $(OPTFLAGS) $(CPPFLAGS) $<
+	$(CC) -c $(CFLAGS) $(OPTFLAGS) $(CPPFLAGS) $(OMP_CFLAGS)$<
 
 .PHONY:	clean
 clean:

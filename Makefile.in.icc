@@ -1,14 +1,17 @@
 # C and Fortran compilers
 CC=icc 
-LD=ifort
+MPICC=mpiicc
 
 # Compiler optimization flags
 OPTFLAGS = -O3
-CFLAGS = -std=gnu99 
+CFLAGS=-std=c99 -g
 LDFLAGS = -fopenmp -nofor_main
 
 # Add -DDEBUG_RUN to CPPFLAGS to cut down on the cases.
 CPPFLAGS = "-DCOMPILER=\"$(CC)\"" "-DFLAGS=\"$(OPTFLAGS)\""
+
+CFLAGS+=$(OPTFLAGS)
+OMP_CFLAGS=$(CFLAGS) -openmp
 
 # Compile a C version (using basic_dgemm.c, in this case):
 LIBS = -lm -lirng
