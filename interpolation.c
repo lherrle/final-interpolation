@@ -126,9 +126,9 @@ int main(int argc, char** argv) {
     double x_0 = 0;
     double dx = 0.1;
     int n_x = 100;
-    double v_0 = -.5;
+    double v_0 = -1;
     double dv = 0.1;
-    int n_v = 100;
+    int n_v = 20;
     double dt = 0.0001;
     int n_l = 5;
     double x[n_x+2*n_l];
