@@ -151,10 +151,12 @@ int main(int argc, char** argv) {
     for (iter = 0; iter < NUM_ITER; iter ++) {
         //on even iterations interpolate using f1 and put in f2
         if (iter%2==0) {
-            for (i = n_l; i < n_x; i++) {
-                for (j = n_l; j < n_v; j++) {
+            for (i = n_l; i < n_x + n_l; i++) {
+                for (j = n_l; j < n_v + n_l; j++) {
                     x_tilde = x[i] + v[j]*dt;
                     v_tilde = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
+                    printf("x_tilde: %.8f\n" + x_tilde);
+                    printf("v_tilde: %.8f\n" + v_tilde);
                     x_c = x_tilde/dx + n_l/2;
                     v_c = v_tilde/dv + n_l/2;
                     printf("x_start_index: %d\n" + x_c);
