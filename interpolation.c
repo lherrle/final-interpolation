@@ -173,10 +173,10 @@ int main(int argc, char** argv) {
                 }
             }
             if (iter == 0) {
-                print_center_to_file("F-first.csv", n_x, n_v, n_l, F_1);
+                print_center_to_file("F-first.csv", n_x, n_v, n_l, F_2);
             }
             if (iter == 2) {
-                print_center_to_file("F-last.csv", n_x, n_v, n_l, F_1);
+                print_center_to_file("F-last.csv", n_x, n_v, n_l, F_2);
             }
         } else { //on odd do opposite
             for (i = n_l; i < n_x; i++) {
@@ -200,7 +200,7 @@ int main(int argc, char** argv) {
                 }
             }
             if (iter == 1) {
-                print_center_to_file("F-mid.csv", n_x, n_v, n_l, F_2);
+                print_center_to_file("F-mid.csv", n_x, n_v, n_l, F_1);
             }
         }
     }
