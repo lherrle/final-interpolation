@@ -8,7 +8,7 @@
 
 #include "interpolation.h"
 
-#define NUM_ITER 3
+#define NUM_ITER 100
 
 /*
  from lagrange_interp_2d.c by John Burkardt
@@ -125,10 +125,10 @@ void print_center_to_file(char* file, int n_x, int n_v, int n_l, double mat[n_x 
 int main(int argc, char** argv) {
     double x_0 = 0;
     double dx = 0.1;
-    int n_x = 10;
+    int n_x = 100;
     double v_0 = -.5;
     double dv = 0.1;
-    int n_v = 10;
+    int n_v = 100;
     double dt = 0.0001;
     int n_l = 5;
     double x[n_x+2*n_l];
@@ -172,12 +172,6 @@ int main(int argc, char** argv) {
                     F_2[i][j] = new_point;
                 }
             }
-            if (iter == 0) {
-                print_center_to_file("F-first.csv", n_x, n_v, n_l, F_2);
-            }
-            if (iter == 2) {
-                print_center_to_file("F-last.csv", n_x, n_v, n_l, F_2);
-            }
         } else { //on odd do opposite
             for (i = n_l; i < n_x; i++) {
                 for (j = n_l; j < n_v; j++) {
@@ -199,9 +193,6 @@ int main(int argc, char** argv) {
                     new_point = lagrange_interp_2d(n_l-1, n_l-1, sub_x, sub_v, sub, x_tilde, v_tilde);
                     F_1[i][j] = new_point;
                 }
-            }
-            if (iter == 1) {
-                print_center_to_file("F-mid.csv", n_x, n_v, n_l, F_1);
             }
         }
     }
