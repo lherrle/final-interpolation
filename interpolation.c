@@ -157,7 +157,7 @@ int main(int argc, char** argv) {
                     v_tilde = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
                     printf("x_tilde: %.8f\n", x_tilde);
                     printf("v_tilde: %.8f\n", v_tilde);
-                    x_c = floor((x_tilde-x_0)/dx) + n_l/2;
+                    x_c = floor((x_tilde-x_0)/dx) + n_l/2 + (n_l%2!=0);
                     v_c = floor((v_tilde-v_0)/dv) + n_l/2;
                     printf("x_start_index: %d\n", x_c);
                     printf("v_start_index: %d\n", v_c);
