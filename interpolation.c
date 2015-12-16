@@ -38,7 +38,7 @@ double lagrange_basis_function_1d ( int mx, double xd[], int i, double xi )
  from lagrange_interp_2d.c by John Burkardt
  */
 double lagrange_interp_2d ( int mx, int my, double xd_1d[], double yd_1d[],
-                            double zd[][n_l], double xi, double yi )
+                            double zd[][mx+1], double xi, double yi )
 
 {
     int i;
