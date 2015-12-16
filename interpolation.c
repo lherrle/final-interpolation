@@ -8,7 +8,7 @@
 
 #include "interpolation.h"
 
-#define NUM_ITER 3
+#define NUM_ITER 2
 
 /*
  from lagrange_interp_2d.c by John Burkardt
@@ -73,7 +73,7 @@ void matrix_gen (double x_0, double dx, int n_x, double v_0, double dv, int n_v,
             if (i == -n_l) {
                 v[j+n_l] = v_0 + dv*j;
             }
-            if(i == -n_l) printf("j: %d, v: %.6f, F: %.6f\n", j, v[j+n_l], cos(x[i+n_l]) * exp(-1*v[j+n_l]*v[j+n_l]));
+            
             F1[i+n_l][j+n_l] = cos(x[i+n_l]) * exp(-1*v[j+n_l]*v[j+n_l]);
             F2[i+n_l][j+n_l] = cos(x[i+n_l]) * exp(-1*v[j+n_l]*v[j+n_l]);
         }
