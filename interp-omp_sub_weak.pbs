@@ -17,7 +17,7 @@ do
 
 	#PBS -l nodes=1:ppn=24
 	#PBS -l walltime=0:30:00
-	#PBS -N path
+	#PBS -N sub_weak
 	#PBS -j oe
 
 	export OMP_NUM_THREADS=${n_threads}
