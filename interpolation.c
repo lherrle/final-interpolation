@@ -196,6 +196,7 @@ int main(int argc, char** argv) {
                                 printf("%.6f, ", sub_v[ii]);
                             }
                             printf("\n");
+                            exit(1);
                         }
                     }
                 }
@@ -233,6 +234,7 @@ int main(int argc, char** argv) {
                                 printf("%.6f, ", sub_v[ii]);
                             }
                             printf("\n");
+                            exit(1);
                         }
                     }
                 }
