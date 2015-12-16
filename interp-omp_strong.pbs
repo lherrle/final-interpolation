@@ -20,6 +20,6 @@ do
 
 	
 	export OMP_NUM_THREADS=${n_threads}
-	echo "started" >> start_strong.txt
+	echo ${n_threads} >> start_strong.txt
 	./interpolate ${m_main} ${s_sub} >> strong_${n_threads}.txt
 done
