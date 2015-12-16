@@ -21,7 +21,7 @@ do
 	#PBS -j oe
 
 	export OMP_NUM_THREADS=${n_threads}
-	./interpolate ${m_main[cont]} ${s_sub} >> weak_omp_sub_${s_sub}.txt
+	./interpolate ${m_main[cont]} ${s_sub} >> weak_omp_sub_${s_sub[cont]}.txt
 	
 	let cont=$cont+1
 done
