@@ -208,6 +208,7 @@ int main(int argc, char** argv) {
             }
             #pragma omp barrier
         }
+        #pragma omp barrier
         sprintf(filename, "F-%d.csv", iter);
         if (iter%2 == 0) {
             print_center_to_file(filename, n_x, n_v, n_l, F_2);
