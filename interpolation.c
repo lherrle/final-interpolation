@@ -8,7 +8,7 @@
 
 #include "interpolation.h"
 
-#define NUM_ITER 100
+#define NUM_ITER 3
 
 /*
  from lagrange_interp_2d.c by John Burkardt
@@ -138,6 +138,7 @@ int main(int argc, char** argv) {
     double sub[n_l][n_l];
     double sub_x[n_l], sub_v[n_l];
     double new_point;
+    char filename[24]
     
     matrix_gen(x_0, dx, n_x, v_0, dv, n_v, dt, n_l, x, v, F_1);
     
@@ -155,7 +156,6 @@ int main(int argc, char** argv) {
             if (iter%2==0) {
                 #pragma omp for
                 for (i = n_l; i < n_x + n_l; i++) {
-                    #pragma omp for
                     for (j = n_l; j < n_v + n_l; j++) {
                         x_tilde = x[i] + v[j]*dt;
                         v_tilde = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
@@ -181,7 +181,6 @@ int main(int argc, char** argv) {
             else { //on odd do opposite
                 #pragma omp for
                 for (i = n_l; i < n_x; i++) {
-                    #pragma omp for
                     for (j = n_l; j < n_v; j++) {
                         x_tilde = x[i] + v[j]*dt;
                         v_tilde = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
@@ -204,6 +203,12 @@ int main(int argc, char** argv) {
                     }
                 }
             }
+        }
+        sprintf(filename, "F-%d.csv", iter);
+        if (NUM_ITER%2 == 0) {
+            print_center_to_file(filename, n_x, n_v, n_l, F_2);
+        } else {
+            print_center_to_file(filename, n_x, n_v, n_l, F_1);
         }
     }
     
