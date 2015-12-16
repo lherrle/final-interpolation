@@ -127,7 +127,7 @@ int main(int argc, char** argv) {
     double dx = 0.1;
     int n_x = atoi(argv[1]);
     double v_0 = -.5;
-    double dv = 0.01;
+    double dv = 0.1;
     int n_v = n_x;
     double dt = 0.0001;
     int n_l = atoi(argv[2]);
@@ -142,7 +142,7 @@ int main(int argc, char** argv) {
     
     matrix_gen(x_0, dx, n_x, v_0, dv, n_v, dt, n_l, x, v, F_1);
     
-    print_center_to_file("F-init.csv", n_x, n_v, n_l, F_1);
+    print_center_to_file("F-init.csv", n_x, n_v, 0, F_1);
     print_center_to_file("F-vs.csv", n_v+2*n_l, 1, 0, v);
     print_center_to_file("F-xs.csv", n_x+2*n_l, 1, 0, x);
     
