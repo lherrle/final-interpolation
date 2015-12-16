@@ -138,7 +138,7 @@ int main(int argc, char** argv) {
     double sub[n_l][n_l];
     double sub_x[n_l], sub_v[n_l];
     double new_point;
-    char filename[24]
+    char filename[24];
     
     matrix_gen(x_0, dx, n_x, v_0, dv, n_v, dt, n_l, x, v, F_1);
     
