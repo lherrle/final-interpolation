@@ -78,7 +78,7 @@ void matrix_gen (double x_0, double dx, int n_x, double v_0, double dv, int n_v,
         }
     }
     
-    //the first n_l are messed up for some reason...
+    /*
     for (i = 0; i < n_l; i++) {
         x[i] = x_0 - dx*(n_l - i);
         x[n_l + n_x + i] = x_0 + dx*(n_x + i);
