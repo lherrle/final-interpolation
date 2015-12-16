@@ -205,7 +205,7 @@ int main(int argc, char** argv) {
             }
         }
         sprintf(filename, "F-%d.csv", iter);
-        if (NUM_ITER%2 == 0) {
+        if (iter%2 == 0) {
             print_center_to_file(filename, n_x, n_v, n_l, F_2);
         } else {
             print_center_to_file(filename, n_x, n_v, n_l, F_1);
