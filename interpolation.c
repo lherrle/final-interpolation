@@ -31,6 +31,14 @@ double lagrange_basis_function_1d ( int mx, double xd[], int i, double xi )
         }
     }
     
+    if (isnan(yi) || !isfinite(yi)) {
+        printf("~~~~~~~~~~~\nxs, 1d, xi=%.2f: ",xi);
+        for (ii=0; ii<n_l; ii++) {
+            printf("%.2f, ", xd[ii]);
+        }
+        printf("~~~~~~~~~~~\n");
+    }
+    
     return yi;
 }
 
