@@ -177,9 +177,7 @@ int main(int argc, char** argv) {
                         }
                         
                         new_point = lagrange_interp_2d(n_l-1, n_l-1, sub_x, sub_v, sub, x_tilde, v_tilde);
-                        #pragma omp barrier
                         F_2[i][j] = new_point;
-                        //#pragma omp barrier
                     }
                 }
             }
@@ -203,12 +201,12 @@ int main(int argc, char** argv) {
                         }
                         
                         new_point = lagrange_interp_2d(n_l-1, n_l-1, sub_x, sub_v, sub, x_tilde, v_tilde);
-                        #pragma omp barrier
                         F_1[i][j] = new_point;
-                        //#pragma omp barrier
+
                     }
                 }
             }
+            #pragma omp barrier
         }
         sprintf(filename, "F-%d.csv", iter);
         if (iter%2 == 0) {
