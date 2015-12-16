@@ -65,7 +65,7 @@ double lagrange_interp_2d ( int mx, int my, double xd_1d[], double yd_1d[],
     return zi;
 }
 
-void matrix_gen (double x_0, double dx, int n_x, double v_0, double dv, int n_v, double dt, int n_l, double x[n_x+2*n_l], double v[n_v+2*n_l], double F[n_x+n_l*2][n_v+n_l*2]) {
+void matrix_gen (double x_0, double dx, int n_x, double v_0, double dv, int n_v, double dt, int n_l, double x[n_x+2*n_l], double v[n_v+2*n_l], double F1[n_x+n_l*2][n_v+n_l*2], double F2[n_x+n_l*2][n_v+n_l*2]) {
     int i, j;
     for (i = -n_l; i < n_x + n_l; i++) {
         x[i+n_l] = x_0 + dx*i;
@@ -74,8 +74,8 @@ void matrix_gen (double x_0, double dx, int n_x, double v_0, double dv, int n_v,
                 v[j+n_l] = v_0 + dv*j;
             }
             if(i == -n_l) printf("j: %d, v: %.6f, F: %.6f\n", j, v[j+n_l], cos(x[i+n_l]) * exp(-1*v[j+n_l]*v[j+n_l]));
-            F[i+n_l][j+n_l] = cos(x[i+n_l]) * exp(-1*v[j+n_l]*v[j+n_l]);
-            if(F[i+n_l][j+n_l] == 0) F[i+n_l][j+n_l] = 0;
+            F1[i+n_l][j+n_l] = cos(x[i+n_l]) * exp(-1*v[j+n_l]*v[j+n_l]);
+            F2[i+n_l][j+n_l] = cos(x[i+n_l]) * exp(-1*v[j+n_l]*v[j+n_l]);
         }
     }
     
@@ -141,7 +141,7 @@ int main(int argc, char** argv) {
     double new_point;
     char filename[24];
     
-    matrix_gen(x_0, dx, n_x, v_0, dv, n_v, dt, n_l, x, v, F_1);
+    matrix_gen(x_0, dx, n_x, v_0, dv, n_v, dt, n_l, x, v, F_1, F_2);
     
     print_center_to_file("F-init.csv", n_x+2*n_l, n_v+2*n_l, 0, F_1);
     print_center_to_file("F-vs.csv", n_v+2*n_l, 1, 0, v);
@@ -180,7 +180,6 @@ int main(int argc, char** argv) {
                     }
                 }
             }
-            #pragma omp barrier
             else { //on odd do opposite
                 #pragma omp for
                 for (i = n_l; i < n_x; i++) {
