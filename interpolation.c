@@ -180,6 +180,7 @@ int main(int argc, char** argv) {
                     }
                 }
             }
+            #pragma omp barrier
             else { //on odd do opposite
                 #pragma omp for
                 for (i = n_l; i < n_x; i++) {
