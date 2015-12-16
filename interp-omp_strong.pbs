@@ -5,7 +5,7 @@
 m_main=${main:-1000}
 s_sub=${sub:-10}
 
-rm strong_${m_main}_${s_sub}*
+rm strong_*
 
 for n_threads in 1 2 3 5 8 10 15 20 24
 do
@@ -20,5 +20,5 @@ do
 
 	
 	export OMP_NUM_THREADS=${n_threads}
-	./interpolate 1000 10 >> strong_${n_threads}.txt
+	./interpolate ${m_main} ${s_sub} >> strong_${n_threads}.txt
 done
