@@ -68,9 +68,9 @@ double lagrange_interp_2d ( int mx, int my, double xd_1d[], double yd_1d[],
 
 void matrix_gen (double x_0, double dx, int n_x, double v_0, double dv, int n_v, double dt, int n_l, double x[n_x], double v[n_v], double F[n_x+n_l*2][n_v+n_l*2]) {
     int i, j;
-    for (i = 0; i < n_x; i++) {
+    for (i = -n_l; i < n_x + n_l; i++) {
         x[i+n_l] = x_0 + dx*i;
-        for (j = 0; j < n_v; j++) {
+        for (j = -n_l; j < n_v + n_l; j++) {
             if (i == 0) {
                 v[j+n_l] = v_0 + dv*j;
             }
@@ -79,7 +79,7 @@ void matrix_gen (double x_0, double dx, int n_x, double v_0, double dv, int n_v,
         }
     }
     
-    for (i = 0; i < n_l; i++) {
+    /*for (i = 0; i < n_l; i++) {
         x[i] = x_0 - dx*(n_l - i);
         x[n_l + n_x + i] = x_0 + dx*(n_x + i);
         for (j = 0; j < n_v + n_l*2; j++) {
@@ -95,7 +95,7 @@ void matrix_gen (double x_0, double dx, int n_x, double v_0, double dv, int n_v,
             F[j][i] = 0;
             F[j][i+n_v+n_l] = 0;
         }
-    }
+    }*/
 }
 
 void print_center_to_file(char* file, int n_x, int n_v, int n_l, double mat[n_x + n_l*2][n_v+n_l*2]) {
