@@ -126,7 +126,7 @@ int main(int argc, char** argv) {
     double dx = 0.1;
     int n_x = atoi(argv[1]);
     double v_0 = -.5;
-    double dv = 0.1;
+    double dv = 0.01;
     int n_v = n_x;
     double dt = 0.0001;
     int n_l = atoi(argv[2]);
