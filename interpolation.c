@@ -153,6 +153,7 @@ int main(int argc, char** argv) {
         #pragma omp parallel
         {
             if (iter%2==0) {
+                #pragma omp for
                 for (i = n_l; i < n_x + n_l; i++) {
                     #pragma omp for
                     for (j = n_l; j < n_v + n_l; j++) {
@@ -178,6 +179,7 @@ int main(int argc, char** argv) {
                 }
             }
             else { //on odd do opposite
+                #pragma omp for
                 for (i = n_l; i < n_x; i++) {
                     #pragma omp for
                     for (j = n_l; j < n_v; j++) {
