@@ -6,7 +6,7 @@ s_sub=${sub:-5}
 
 rm weak_omp_main*
 
-m_main=(100 200 400 800 1200 1600 2000 2400)
+m_main=(38 75 150 300 450 600 750 900)
 cont=0
 
 for n_threads in 1 2 4 8 12 16 20 24

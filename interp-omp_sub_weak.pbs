@@ -2,7 +2,7 @@
 # The default values for p_prob is 0.05.
 # To run this: qsub -v prob=probability path-omp_weak-.pbs
 
-m_main=${main:-1000}
+m_main=${main:-500}
 
 rm weak_omp_sub*
 

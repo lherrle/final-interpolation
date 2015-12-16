@@ -2,7 +2,7 @@
 # The default values for n_nodes and p_prob are 2000 and 0.05 respectively.
 # To run this: qsub -v nodes=number_of_nodes,prob=probability path.pbs
 
-m_main=${main:-1000}
+m_main=${main:-500}
 s_sub=${sub:-10}
 
 rm strong_*
