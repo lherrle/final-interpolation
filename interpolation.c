@@ -38,7 +38,7 @@ double lagrange_basis_function_1d ( int mx, double xd[], int i, double xi )
  from lagrange_interp_2d.c by John Burkardt
  */
 double lagrange_interp_2d ( int mx, int my, double xd_1d[], double yd_1d[],
-                            double zd[], double xi, double yi )
+                            double zd[][n_l], double xi, double yi )
 
 {
     int i;
@@ -58,8 +58,7 @@ double lagrange_interp_2d ( int mx, int my, double xd_1d[], double yd_1d[],
         {
             lx = lagrange_basis_function_1d ( mx, xd_1d, i, xi );
             ly = lagrange_basis_function_1d ( my, yd_1d, j, yi );
-            zi = zi + zd[l] * lx * ly;
-            l = l + 1;
+            zi = zi + zd[i][j] * lx * ly;
         }
     }
     
@@ -114,9 +113,9 @@ void print_center_to_file(char* file, int n_x, int n_v, int n_l, double mat[n_x 
     for (i = 0; i < n_v; i ++) {
         for (j = 0; j < n_x; j ++) {
             if (j == n_x - 1) {
-                fprintf(fp, "%.6f\n", mat[n_l + j][n_l+i]);
+                fprintf(fp, "%.4f\n", mat[n_l + j][n_l+i]);
             } else {
-            fprintf(fp, "%.6f, ", mat[n_l + j][n_l+i]);
+            fprintf(fp, "%.4f, ", mat[n_l + j][n_l+i]);
             }
         }
     }
