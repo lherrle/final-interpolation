@@ -150,7 +150,13 @@ int main(int argc, char** argv) {
     char filename[24];
     double times[NUM_ITER];
     
+    double s = omp_get_wtime();
+    
     matrix_gen(x_0, dx, n_x, v_0, dv, n_v, dt, n_l, x, v, F_1, F_2);
+    
+    double f = omp_get_wtime();
+    
+    printf("%f\n", f-s);
     
     print_center_to_file("F-init.csv", n_x+2*n_l, n_v+2*n_l, 0, F_1);
     print_center_to_file("F-vs.csv", n_v+2*n_l, 1, 0, v);
