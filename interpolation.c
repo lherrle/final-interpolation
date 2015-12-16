@@ -182,8 +182,8 @@ int main(int argc, char** argv) {
             }
             else { //on odd do opposite
                 #pragma omp for
-                for (i = n_l; i < n_x; i++) {
-                    for (j = n_l; j < n_v; j++) {
+                for (i = n_l; i < n_x + n_l; i++) {
+                    for (j = n_l; j < n_v + n_l; j++) {
                         x_tilde = x[i] + v[j]*dt;
                         v_tilde = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
                         x_c = floor((x_tilde-x_0)/dx) + n_l/2 + (n_l%2!=0);
