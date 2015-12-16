@@ -153,7 +153,7 @@ int main(int argc, char** argv) {
         #pragma omp parallel
         {
             if (iter%2==0) {
-                #pragma omp for
+                //#pragma omp for
                 for (i = n_l; i < n_x + n_l; i++) {
                     for (j = n_l; j < n_v + n_l; j++) {
                         x_tilde = x[i] + v[j]*dt;
@@ -176,7 +176,7 @@ int main(int argc, char** argv) {
                     }
                 }
             } else { //on odd do opposite
-                #pragma omp for
+                //#pragma omp for
                 for (i = n_l; i < n_x; i++) {
                     for (j = n_l; j < n_v; j++) {
                         x_tilde = x[i] + v[j]*dt;
