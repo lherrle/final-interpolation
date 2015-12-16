@@ -150,53 +150,54 @@ int main(int argc, char** argv) {
     
     for (iter = 0; iter < NUM_ITER; iter ++) {
         //on even iterations interpolate using f1 and put in f2
-        #pragma omp parallel {
-        if (iter%2==0) {
-            #pragma omp for
-            for (i = n_l; i < n_x + n_l; i++) {
-                for (j = n_l; j < n_v + n_l; j++) {
-                    x_tilde = x[i] + v[j]*dt;
-                    v_tilde = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
-                    x_c = floor((x_tilde-x_0)/dx) + n_l/2 + (n_l%2!=0);
-                    v_c = floor((v_tilde-v_0)/dv) + n_l/2 + (n_l%2!=0);
-
-                    for (ii=0; ii<n_l; ii++) {
-                        sub_x[ii] = x[x_c+ii];
-                        for (jj = 0; jj < n_l; jj++) {
-                            if(ii==0) {
-                                sub_v[jj] = v[v_c+jj];
+        #pragma omp parallel
+        {
+            if (iter%2==0) {
+                #pragma omp for
+                for (i = n_l; i < n_x + n_l; i++) {
+                    for (j = n_l; j < n_v + n_l; j++) {
+                        x_tilde = x[i] + v[j]*dt;
+                        v_tilde = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
+                        x_c = floor((x_tilde-x_0)/dx) + n_l/2 + (n_l%2!=0);
+                        v_c = floor((v_tilde-v_0)/dv) + n_l/2 + (n_l%2!=0);
+                        
+                        for (ii=0; ii<n_l; ii++) {
+                            sub_x[ii] = x[x_c+ii];
+                            for (jj = 0; jj < n_l; jj++) {
+                                if(ii==0) {
+                                    sub_v[jj] = v[v_c+jj];
+                                }
+                                sub[ii][jj] = F_1[x_c+ii][v_c+jj];
                             }
-                            sub[ii][jj] = F_1[x_c+ii][v_c+jj];
                         }
+                        
+                        new_point = lagrange_interp_2d(n_l-1, n_l-1, sub_x, sub_v, sub, x_tilde, v_tilde);
+                        F_2[i][j] = new_point;
                     }
-                    
-                    new_point = lagrange_interp_2d(n_l-1, n_l-1, sub_x, sub_v, sub, x_tilde, v_tilde);
-                    F_2[i][j] = new_point;
                 }
-            }
-        } else { //on odd do opposite
-            #pragma omp for
-            for (i = n_l; i < n_x; i++) {
-                for (j = n_l; j < n_v; j++) {
-                    x_tilde = x[i] + v[j]*dt;
-                    v_tilde = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
-                    x_c = floor((x_tilde-x_0)/dx) + n_l/2 + (n_l%2!=0);
-                    v_c = floor((v_tilde-v_0)/dv) + n_l/2 + (n_l%2!=0);
-                    
-                    for (ii=0; ii<n_l; ii++) {
-                        sub_x[ii] = x[x_c+ii];
-                        for (jj = 0; jj < n_l; jj++) {
-                            if(ii==0) {
-                                sub_v[jj] = v[v_c+jj];
+            } else { //on odd do opposite
+                #pragma omp for
+                for (i = n_l; i < n_x; i++) {
+                    for (j = n_l; j < n_v; j++) {
+                        x_tilde = x[i] + v[j]*dt;
+                        v_tilde = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
+                        x_c = floor((x_tilde-x_0)/dx) + n_l/2 + (n_l%2!=0);
+                        v_c = floor((v_tilde-v_0)/dv) + n_l/2 + (n_l%2!=0);
+                        
+                        for (ii=0; ii<n_l; ii++) {
+                            sub_x[ii] = x[x_c+ii];
+                            for (jj = 0; jj < n_l; jj++) {
+                                if(ii==0) {
+                                    sub_v[jj] = v[v_c+jj];
+                                }
+                                sub[ii][jj] = F_2[x_c+ii][v_c+jj];
                             }
-                            sub[ii][jj] = F_2[x_c+ii][v_c+jj];
                         }
+                        
+                        new_point = lagrange_interp_2d(n_l-1, n_l-1, sub_x, sub_v, sub, x_tilde, v_tilde);
+                        F_1[i][j] = new_point;
                     }
-                    
-                    new_point = lagrange_interp_2d(n_l-1, n_l-1, sub_x, sub_v, sub, x_tilde, v_tilde);
-                    F_1[i][j] = new_point;
                 }
-            }
             }
         }
     }
