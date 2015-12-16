@@ -235,6 +235,6 @@ int main(int argc, char** argv) {
     }
     
     for (iter = 0; iter < NUM_ITER; iter ++) {
-        printf(fp, "%f\n", times[iter]);
+        printf("%f\n", times[iter]);
     }
 }
