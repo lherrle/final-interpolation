@@ -70,7 +70,7 @@ void matrix_gen (double x_0, double dx, int n_x, double v_0, double dv, int n_v,
     for (i = -n_l; i < n_x + n_l; i++) {
         x[i+n_l] = x_0 + dx*i;
         for (j = -n_l; j < n_v + n_l; j++) {
-            if (i == 0) {
+            if (i == -n_l) {
                 v[j+n_l] = v_0 + dv*j;
             }
             if(i == -n_l) printf("j: %d, v: %.6f, F: %.6f\n", j, v[j+n_l], cos(x[i+n_l]) * exp(-1*v[j+n_l]*v[j+n_l]));
