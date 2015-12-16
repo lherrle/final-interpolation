@@ -65,7 +65,7 @@ double lagrange_interp_2d ( int mx, int my, double xd_1d[], double yd_1d[],
     return zi;
 }
 
-void matrix_gen (double x_0, double dx, int n_x, double v_0, double dv, int n_v, double dt, int n_l, double x[n_x], double v[n_v], double F[n_x+n_l*2][n_v+n_l*2]) {
+void matrix_gen (double x_0, double dx, int n_x, double v_0, double dv, int n_v, double dt, int n_l, double x[n_x+2*n_l], double v[n_v+2*n_l], double F[n_x+n_l*2][n_v+n_l*2]) {
     int i, j;
     for (i = -n_l; i < n_x + n_l; i++) {
         x[i+n_l] = x_0 + dx*i;
