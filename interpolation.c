@@ -175,8 +175,9 @@ int main(int argc, char** argv) {
                         }
                         
                         new_point = lagrange_interp_2d(n_l-1, n_l-1, sub_x, sub_v, sub, x_tilde, v_tilde);
-                        printf("%d,%d: %.6f\n", i,j,new_point);
+                        printf("%d,%d: %.6f; ", i,j,new_point);
                         F_2[i][j] = new_point;
+                        printf("%.6f\n",F_2[i][j]);
                     }
                 }
             }
@@ -200,7 +201,9 @@ int main(int argc, char** argv) {
                         }
                         
                         new_point = lagrange_interp_2d(n_l-1, n_l-1, sub_x, sub_v, sub, x_tilde, v_tilde);
+                        printf("%d,%d: %.6f; ", i,j,new_point);
                         F_1[i][j] = new_point;
+                        printf("%.6f\n",F_1[i][j]);
 
                     }
                 }
