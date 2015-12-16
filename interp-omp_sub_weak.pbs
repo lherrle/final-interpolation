@@ -4,7 +4,7 @@
 
 m_main=${main:-1000}
 
-rm weak_omp_${p_prob}*
+rm weak_omp_sub*
 
 s_sub=(5 10 20 40 60 80 100 120)
 cont=0
