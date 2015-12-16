@@ -8,7 +8,7 @@
 
 #include "interpolation.h"
 
-#define NUM_ITER 100
+#define NUM_ITER 3
 
 /*
  from lagrange_interp_2d.c by John Burkardt
@@ -30,6 +30,8 @@ double lagrange_basis_function_1d ( int mx, double xd[], int i, double xi )
             }
         }
     }
+    
+    printf("%.6f\n",yi);
     
     return yi;
 }
@@ -151,6 +153,7 @@ int main(int argc, char** argv) {
     double x_tilde, v_tilde;
     
     for (iter = 0; iter < NUM_ITER; iter ++) {
+        printf("--------------------------------------------");
         //on even iterations interpolate using f1 and put in f2
         #pragma omp parallel
         {
