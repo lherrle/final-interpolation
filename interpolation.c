@@ -114,9 +114,9 @@ void print_center_to_file(char* file, int n_x, int n_v, int n_l, double mat[n_x 
     for (i = 0; i < n_v; i ++) {
         for (j = 0; j < n_x; j ++) {
             if (j == n_x - 1) {
-                fprintf(fp, "%.8f\n", mat[n_l + j][n_l+i]);
+                fprintf(fp, "%.6f\n", mat[n_l + j][n_l+i]);
             } else {
-            fprintf(fp, "%.8f, ", mat[n_l + j][n_l+i]);
+            fprintf(fp, "%.6f, ", mat[n_l + j][n_l+i]);
             }
         }
     }
