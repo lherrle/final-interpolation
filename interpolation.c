@@ -153,8 +153,8 @@ int main(int argc, char** argv) {
         #pragma omp parallel
         {
             if (iter%2==0) {
-                #pragma omp for
                 for (i = n_l; i < n_x + n_l; i++) {
+                    #pragma omp for
                     for (j = n_l; j < n_v + n_l; j++) {
                         x_tilde = x[i] + v[j]*dt;
                         v_tilde = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
@@ -173,13 +173,13 @@ int main(int argc, char** argv) {
                         
                         new_point = lagrange_interp_2d(n_l-1, n_l-1, sub_x, sub_v, sub, x_tilde, v_tilde);
                         F_2[i][j] = new_point;
+                        #pragma omp barrier
                     }
                 }
             }
-            #pragma omp barrier
             else { //on odd do opposite
-                #pragma omp for
                 for (i = n_l; i < n_x; i++) {
+                    #pragma omp for
                     for (j = n_l; j < n_v; j++) {
                         x_tilde = x[i] + v[j]*dt;
                         v_tilde = v[j] + cos(x[i])*dt/2; //THIS IS WHERE E IS
@@ -198,10 +198,10 @@ int main(int argc, char** argv) {
                         
                         new_point = lagrange_interp_2d(n_l-1, n_l-1, sub_x, sub_v, sub, x_tilde, v_tilde);
                         F_1[i][j] = new_point;
+                        #pragma omp barrier
                     }
                 }
             }
-            #pragma omp barrier
         }
     }
     
