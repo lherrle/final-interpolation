@@ -31,13 +31,13 @@ double lagrange_basis_function_1d ( int mx, double xd[], int i, double xi )
         }
     }
     
-    if (isnan(yi) || !isfinite(yi)) {
+    /*if (isnan(yi) || !isfinite(yi)) {
         printf("~~~~~~~~~~~\nxs, 1d, xi=%.2f, i=%d, yi=%f: ",xi,i,yi);
         for (j=0; j<mx+1; j++) {
             printf("%.2f, ", xd[j]);
         }
         printf("\n~~~~~~~~~~~\n");
-    }
+    }*/
     
     return yi;
 }
@@ -148,6 +148,7 @@ int main(int argc, char** argv) {
     double sub_x[n_l], sub_v[n_l];
     double new_point;
     char filename[24];
+    double times[NUM_ITER];
     
     matrix_gen(x_0, dx, n_x, v_0, dv, n_v, dt, n_l, x, v, F_1, F_2);
     
@@ -159,8 +160,9 @@ int main(int argc, char** argv) {
     double x_tilde, v_tilde;
     
     for (iter = 0; iter < NUM_ITER; iter ++) {
-        printf("--------------------------------------------\n");
+        //printf("--------------------------------------------\n");
         //on even iterations interpolate using f1 and put in f2
+        double start = omp_get_wtime();
         #pragma omp parallel
         {
             if (iter%2==0) {
@@ -216,6 +218,8 @@ int main(int argc, char** argv) {
             #pragma omp barrier
         }
         #pragma omp barrier
+        double finish = omp_get_wtime();
+        times[iter] = finish-start;
         sprintf(filename, "F-%d.csv", iter);
         if (iter%2 == 0) {
             print_center_to_file(filename, n_x, n_v, n_l, F_2);
@@ -228,5 +232,9 @@ int main(int argc, char** argv) {
         print_center_to_file("F-final.csv", n_x, n_v, n_l, F_2);
     } else {
         print_center_to_file("F-final.csv", n_x, n_v, n_l, F_1);
+    }
+    
+    for (iter = 0; iter < NUM_ITER; iter ++) {
+        printf(fp, "%f\n", times[iter]);
     }
 }

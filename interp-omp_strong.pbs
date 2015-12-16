@@ -2,10 +2,10 @@
 # The default values for n_nodes and p_prob are 2000 and 0.05 respectively.
 # To run this: qsub -v nodes=number_of_nodes,prob=probability path.pbs
 
-n_nodes=${nodes:-2000}
-p_prob=${prob:-0.05}
+m_main=${main:-1000}
+s_sub=${sub:-10}
 
-rm strong_omp_${n_nodes}_${p_prob}*
+rm strong_${m_main}_${s_sub}*
 
 for n_threads in 1 2 3 5 8 10 15 20 24
 do
@@ -20,5 +20,5 @@ do
 
 	
 	export OMP_NUM_THREADS=${n_threads}
-	./path.x -n ${n_nodes} -p ${p_prob} >> strong_omp_${p_prob}_${n_nodes}.txt
+	./interpolate 1000 10 >> strong_${n_threads}.txt
 done
