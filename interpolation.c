@@ -33,8 +33,8 @@ double lagrange_basis_function_1d ( int mx, double xd[], int i, double xi )
     
     if (isnan(yi) || !isfinite(yi)) {
         printf("~~~~~~~~~~~\nxs, 1d, xi=%.2f: ",xi);
-        for (ii=0; ii<mx+1; ii++) {
-            printf("%.2f, ", xd[ii]);
+        for (j=0; j<mx+1; j++) {
+            printf("%.2f, ", xd[j]);
         }
         printf("~~~~~~~~~~~\n");
     }
