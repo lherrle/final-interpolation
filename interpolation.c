@@ -31,8 +31,6 @@ double lagrange_basis_function_1d ( int mx, double xd[], int i, double xi )
         }
     }
     
-    printf("%.6f\n",yi);
-    
     return yi;
 }
 
@@ -63,6 +61,8 @@ double lagrange_interp_2d ( int mx, int my, double xd_1d[], double yd_1d[],
             zi = zi + zd[i][j] * lx * ly;
         }
     }
+    
+    printf("%.6f\n", zi);
     
     return zi;
 }
@@ -153,7 +153,7 @@ int main(int argc, char** argv) {
     double x_tilde, v_tilde;
     
     for (iter = 0; iter < NUM_ITER; iter ++) {
-        printf("--------------------------------------------");
+        printf("--------------------------------------------\n");
         //on even iterations interpolate using f1 and put in f2
         #pragma omp parallel
         {
